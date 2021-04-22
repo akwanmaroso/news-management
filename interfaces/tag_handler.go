@@ -72,7 +72,7 @@ func (t *Tag) GetTag(c *gin.Context) {
 }
 
 func (t *Tag) UpdateTag(c *gin.Context) {
-	tagId, err := strconv.ParseUint(c.Param("news_id"), 10, 64)
+	tagId, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, ErrorResponse(http.StatusBadRequest, err.Error()))
 		return
@@ -100,7 +100,7 @@ func (t *Tag) UpdateTag(c *gin.Context) {
 	}
 
 	tagToUpdate.Name = tag.Name
-	updatedTag, updateError := t.tagApp.UpdateTag(&tag)
+	updatedTag, updateError := t.tagApp.UpdateTag(tagToUpdate)
 	if updateError != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse(http.StatusInternalServerError, updateError))
 		return
