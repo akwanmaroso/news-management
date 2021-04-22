@@ -16,6 +16,12 @@ type News struct {
 	tagApp  app.TagAppInterface
 }
 
+var statusType = map[string]string{
+	"Draft":   "Draft",
+	"Publish": "Publish",
+	"Deleted": "Deleted",
+}
+
 func NewNews(newsApp app.NewsAppInterface, tagApp app.TagAppInterface) *News {
 	return &News{newsApp, tagApp}
 }
@@ -48,12 +54,6 @@ func (n *News) SaveNews(c *gin.Context) {
 			n.tagApp.SaveTag(foundTag)
 		}
 		tags = append(tags, foundTag)
-	}
-
-	statusType := map[string]string{
-		"Draft":   "Draft",
-		"Publish": "Publish",
-		"Deleted": "Deleted",
 	}
 
 	emptyNews := entity.News{}
@@ -140,25 +140,12 @@ func (n *News) UpdateNews(c *gin.Context) {
 		Tag     []string `json:"tags"`
 	}
 
-	// var news entity.News
 	var newsTagPayload NewsTagPayload
 	err = c.BindJSON(&newsTagPayload)
 	if err != nil {
 		c.JSON(http.StatusUnprocessableEntity, ErrorResponse(http.StatusBadRequest, "Error bind json"))
 		return
 	}
-	// emptyNews := entity.News{}
-	// emptyNews.Topic = news.Topic
-	// emptyNews.Content = news.Content
-	// emptyNews.Status = news.Status
-	// emptyNews.Tag = news.Tag
-	// validateNews := emptyNews.Validate()
-	// if len(validateNews) > 0 {
-	//	c.JSON(http.StatusUnprocessableEntity, ErrorResponse(http.StatusBadRequest, validateNews))
-	//	return
-	// }
-
-	log.Println(newsTagPayload)
 
 	var tags []*entity.Tag
 	var foundTag *entity.Tag
@@ -173,17 +160,16 @@ func (n *News) UpdateNews(c *gin.Context) {
 		tags = append(tags, foundTag)
 	}
 
-	// emptyNews := entity.News{}
-	// emptyNews.Topic = news.Topic
-	// emptyNews.Content = news.Content
-	// emptyNews.Status = news.Status
-	// emptyNews.TagID = news.TagID
-	// emptyNews.UpdatedAt = time.Now()
-	// validateNews := emptyNews.Validate()
-	// if len(validateNews) > 0 {
-	//	c.JSON(http.StatusBadRequest, validateNews)
-	//	return
-	// }
+	emptyNews := entity.News{}
+	emptyNews.Topic = newsTagPayload.Topic
+	emptyNews.Content = newsTagPayload.Content
+	emptyNews.Status = statusType[newsTagPayload.Status]
+	emptyNews.Tags = tags
+	validateNews := emptyNews.Validate()
+	if len(validateNews) > 0 {
+		c.JSON(http.StatusUnprocessableEntity, ErrorResponse(http.StatusBadRequest, validateNews))
+		return
+	}
 
 	newsToUpdate, err := n.newsApp.GetNews(newsID)
 	if err != nil {
