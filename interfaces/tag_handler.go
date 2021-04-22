@@ -57,12 +57,12 @@ func (t *Tag) GetAllTag(c *gin.Context) {
 }
 
 func (t *Tag) GetTag(c *gin.Context) {
-	tagId, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
+	tagID, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, ErrorResponse(http.StatusBadRequest, err.Error()))
 		return
 	}
-	tag, err := t.tagApp.GetTag(tagId)
+	tag, err := t.tagApp.GetTag(tagID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
@@ -72,7 +72,7 @@ func (t *Tag) GetTag(c *gin.Context) {
 }
 
 func (t *Tag) UpdateTag(c *gin.Context) {
-	tagId, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
+	tagID, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, ErrorResponse(http.StatusBadRequest, err.Error()))
 		return
@@ -93,9 +93,9 @@ func (t *Tag) UpdateTag(c *gin.Context) {
 		return
 	}
 
-	tagToUpdate, err := t.tagApp.GetTag(tagId)
+	tagToUpdate, err := t.tagApp.GetTag(tagID)
 	if err != nil {
-		c.JSON(http.StatusNotFound, ErrorResponse(http.StatusNotFound, fmt.Sprintf("tag with id: %d is not exists", tagId)))
+		c.JSON(http.StatusNotFound, ErrorResponse(http.StatusNotFound, fmt.Sprintf("tag with id: %d is not exists", tagID)))
 		return
 	}
 
@@ -110,18 +110,18 @@ func (t *Tag) UpdateTag(c *gin.Context) {
 }
 
 func (t *Tag) DeleteTag(c *gin.Context) {
-	tagId, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
+	tagID, err := strconv.ParseUint(c.Param("tag_id"), 10, 64)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, ErrorResponse(http.StatusBadRequest, err.Error()))
 		return
 	}
 
-	err = t.tagApp.DeleteTag(tagId)
+	err = t.tagApp.DeleteTag(tagID)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, ErrorResponse(http.StatusInternalServerError, err.Error()))
 		return
 	}
 
-	c.JSON(http.StatusOK, SuccessResponse(http.StatusOK, fmt.Sprintf("News With Tag: %d is succesfully deleted", tagId)))
+	c.JSON(http.StatusOK, SuccessResponse(http.StatusOK, fmt.Sprintf("News With Tag: %d is successfully deleted", tagID)))
 }

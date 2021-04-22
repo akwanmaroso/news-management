@@ -29,8 +29,8 @@ func (n *newsApps) GetAllNews() ([]*entity.News, error) {
 	return n.newsApp.GetAllNews()
 }
 
-func (n *newsApps) GetNews(newsId uint64) (*entity.News, error) {
-	return n.newsApp.GetNews(newsId)
+func (n *newsApps) GetNews(newsID uint64) (*entity.News, error) {
+	return n.newsApp.GetNews(newsID)
 }
 
 func (n *newsApps) GetByTopic(topic string) ([]*entity.News, error) {
@@ -45,6 +45,6 @@ func (n *newsApps) UpdateNews(news *entity.News) (*entity.News, map[string]strin
 	return n.newsApp.UpdateNews(news)
 }
 
-func (n *newsApps) DeleteNews(newsId uint64) error {
-	return n.newsApp.DeleteNews(newsId)
+func (n *newsApps) DeleteNews(newsID uint64) error {
+	return n.newsApp.DeleteNews(newsID)
 }

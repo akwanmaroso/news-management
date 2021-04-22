@@ -1,4 +1,4 @@
-package persistance
+package persistence
 
 import (
 	"errors"
@@ -31,9 +31,9 @@ func (t *TagRepo) SaveTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return tag, nil
 }
 
-func (t *TagRepo) GetTag(tagId uint64) (*entity.Tag, error) {
+func (t *TagRepo) GetTag(tagID uint64) (*entity.Tag, error) {
 	var tag entity.Tag
-	err := t.db.Debug().Where("id = ?", tagId).Take(&tag).Error
+	err := t.db.Debug().Where("id = ?", tagID).Take(&tag).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return nil, errors.New("record tag not found")
 	}
@@ -71,10 +71,10 @@ func (t *TagRepo) UpdateTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return tag, nil
 }
 
-func (t *TagRepo) DeleteTag(tagId uint64) error {
+func (t *TagRepo) DeleteTag(tagID uint64) error {
 	var tag entity.Tag
 
-	err := t.db.Debug().Where("id = ?", tagId).Delete(&tag).Error
+	err := t.db.Debug().Where("id = ?", tagID).Delete(&tag).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return errors.New("record news not found")
 	}

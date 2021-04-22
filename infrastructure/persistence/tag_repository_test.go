@@ -1,4 +1,4 @@
-package persistance
+package persistence
 
 import (
 	"github.com/akwanmaroso/news/domain/entity"

@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/akwanmaroso/news/infrastructure/persistance"
+	"github.com/akwanmaroso/news/infrastructure/persistence"
 	"github.com/akwanmaroso/news/interfaces"
 	"github.com/gin-gonic/gin"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -22,7 +23,7 @@ func main() {
 	dbUser := os.Getenv("DB_USER")
 	dbName := os.Getenv("DB_NAME")
 	dbPort := os.Getenv("DB_PORT")
-	services, err := persistance.NewRepositories(dbDriver, dbUser, dbPassword, dbPort, dbHost, dbName)
+	services, err := persistence.NewRepositories(dbDriver, dbUser, dbPassword, dbPort, dbHost, dbName)
 	if err != nil {
 		panic(err)
 	}
@@ -50,5 +51,7 @@ func main() {
 	api.DELETE("/tags/:tag_id", tag.DeleteTag)
 	api.POST("/tags", tag.SaveTag)
 
-	log.Fatal(r.Run(":8000"))
+	if err := r.Run(":8000"); err != nil {
+		panic(err)
+	}
 }

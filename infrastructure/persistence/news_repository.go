@@ -1,4 +1,4 @@
-package persistance
+package persistence
 
 import (
 	"errors"
@@ -31,9 +31,9 @@ func (n *NewsRepo) SaveNews(news *entity.News) (*entity.News, map[string]string)
 	return news, nil
 }
 
-func (n *NewsRepo) GetNews(newsId uint64) (*entity.News, error) {
+func (n *NewsRepo) GetNews(newsID uint64) (*entity.News, error) {
 	var news entity.News
-	err := n.db.Debug().Where("id = ?", newsId).Preload("Tags").Find(&news).Error
+	err := n.db.Debug().Where("id = ?", newsID).Preload("Tags").Find(&news).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return nil, errors.New("news not found")
 	}
@@ -101,10 +101,10 @@ func (n *NewsRepo) UpdateNews(news *entity.News) (*entity.News, map[string]strin
 	return news, nil
 }
 
-func (n *NewsRepo) DeleteNews(newsId uint64) error {
+func (n *NewsRepo) DeleteNews(newsID uint64) error {
 	var news entity.News
 
-	err := n.db.Debug().Where("id = ?", newsId).Delete(&news).Error
+	err := n.db.Debug().Where("id = ?", newsID).Delete(&news).Error
 	if gorm.IsRecordNotFoundError(err) {
 		return errors.New("record news not found")
 	}

@@ -24,8 +24,8 @@ func (t *tagApps) SaveTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return t.tagApp.SaveTag(tag)
 }
 
-func (t *tagApps) GetTag(tagId uint64) (*entity.Tag, error) {
-	return t.tagApp.GetTag(tagId)
+func (t *tagApps) GetTag(tagID uint64) (*entity.Tag, error) {
+	return t.tagApp.GetTag(tagID)
 }
 
 func (t *tagApps) GetAllTag() ([]*entity.Tag, error) {
@@ -40,6 +40,6 @@ func (t *tagApps) UpdateTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return t.tagApp.UpdateTag(tag)
 }
 
-func (t *tagApps) DeleteTag(tagId uint64) error {
-	return t.tagApp.DeleteTag(tagId)
+func (t *tagApps) DeleteTag(tagID uint64) error {
+	return t.tagApp.DeleteTag(tagID)
 }

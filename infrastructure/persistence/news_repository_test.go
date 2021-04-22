@@ -1,7 +1,8 @@
-package persistance
+package persistence
 
 import (
 	"github.com/akwanmaroso/news/domain/entity"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
