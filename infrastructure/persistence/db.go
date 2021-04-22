@@ -23,13 +23,13 @@ func NewRepositories(DbDriver, DbUser, DbPassword, DbPort, DbHost, DbName string
 	}
 	db.LogMode(true)
 	return &Repositories{
-		News: NewDrugRepository(db),
+		News: NewNewsRepository(db),
 		Tag:  NewTagRepository(db),
 		db:   db,
 	}, nil
 }
 func (repository *Repositories) Close() error {
-	return repository.Close()
+	return repository.db.Close()
 }
 
 func (repository *Repositories) AutoMigrate() error {

@@ -12,7 +12,7 @@ type NewsRepo struct {
 	db *gorm.DB
 }
 
-func NewDrugRepository(db *gorm.DB) *NewsRepo {
+func NewNewsRepository(db *gorm.DB) *NewsRepo {
 	return &NewsRepo{db}
 }
 

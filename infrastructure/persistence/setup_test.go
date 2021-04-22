@@ -11,8 +11,7 @@ import (
 
 func DBConn() (*gorm.DB, error) {
 	//if _, err := os.Stat("../../.env"); !os.IsNotExist(err) {
-	var err error
-	err = godotenv.Load(os.ExpandEnv("../../.env"))
+	err := godotenv.Load(os.ExpandEnv("../../.env"))
 	if err != nil {
 		log.Fatalf("Error getting env %v\n", err)
 	}
@@ -21,15 +20,15 @@ func DBConn() (*gorm.DB, error) {
 }
 
 func LocalDatabase() (*gorm.DB, error) {
-	DbDriver := os.Getenv("TEST_DB_DRIVER")
-	DbHost := os.Getenv("TEST_DB_HOST")
-	DbPassword := os.Getenv("TEST_DB_PASSWORD")
-	DbUser := os.Getenv("TEST_DB_USER")
-	DbName := os.Getenv("TEST_DB_NAME")
-	DbPort := os.Getenv("TEST_DB_PORT")
+	DBDriver := os.Getenv("TEST_DB_DRIVER")
+	DBHost := os.Getenv("TEST_DB_HOST")
+	DBPassword := os.Getenv("TEST_DB_PASSWORD")
+	DBUser := os.Getenv("TEST_DB_USER")
+	DBName := os.Getenv("TEST_DB_NAME")
+	DBPort := os.Getenv("TEST_DB_PORT")
 
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
-	conn, err := gorm.Open(DbDriver, DBURL)
+	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DBHost, DBPort, DBUser, DBName, DBPassword)
+	conn, err := gorm.Open(DBDriver, DBURL)
 	if err != nil {
 		return nil, err
 	}
