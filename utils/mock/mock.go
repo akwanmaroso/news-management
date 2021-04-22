@@ -54,7 +54,7 @@ func (t *TagAppInterface) SaveTag(tag *entity.Tag) (*entity.Tag, map[string]stri
 }
 
 func (t *TagAppInterface) GetTag(tagID uint64) (*entity.Tag, error) {
-	return t.GetTag(tagID)
+	return t.GetTagFn(tagID)
 }
 
 func (t *TagAppInterface) GetAllTag() ([]*entity.Tag, error) {
