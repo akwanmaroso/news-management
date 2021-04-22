@@ -1,11 +1,10 @@
-package persistance
+package persistence
 
 import (
 	"fmt"
 	"github.com/akwanmaroso/news/domain/entity"
 	"github.com/akwanmaroso/news/domain/repository"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"log"
 )
 
@@ -15,9 +14,9 @@ type Repositories struct {
 	db   *gorm.DB
 }
 
-func NewRepositories(DbDriver, DbUser, DbPassword, DbPort, DbHost, DbName string) (*Repositories, error) {
-	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", DbHost, DbPort, DbUser, DbName, DbPassword)
-	db, err := gorm.Open(DbDriver, DBURL)
+func NewRepositories(dbDriver, dbUser, dbPassword, dbPort, dbHost, dbName string) (*Repositories, error) {
+	DBURL := fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", dbHost, dbPort, dbUser, dbName, dbPassword)
+	db, err := gorm.Open(dbDriver, DBURL)
 	if err != nil {
 		return nil, err
 	}
