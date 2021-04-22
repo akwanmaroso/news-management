@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-func TestTag_SaveTag(t *testing.T) {
+func TestTag_SaveTag_Success(t *testing.T) {
 	tagApp.SaveTagFn = func(tag *entity.Tag) (*entity.Tag, map[string]string) {
 		return &entity.Tag{
 			Name: "First Tag",
@@ -54,7 +54,7 @@ func TestTag_SaveTag(t *testing.T) {
 	assert.EqualValues(t, tagPayload.Data.Name, "First Tag")
 }
 
-func TestTag_GetAllTag(t *testing.T) {
+func TestTag_GetAllTag_Success(t *testing.T) {
 	tagApp.GetAllTagFn = func() ([]*entity.Tag, error) {
 		return []*entity.Tag{
 			{
@@ -97,7 +97,7 @@ func TestTag_GetAllTag(t *testing.T) {
 	assert.EqualValues(t, len(tagPayload.Data), 2)
 }
 
-func TestTag_GetTag(t *testing.T) {
+func TestTag_GetTag_Success(t *testing.T) {
 	tagApp.GetTagFn = func(tagID uint64) (*entity.Tag, error) {
 		return &entity.Tag{
 			Name: "First Tag",

@@ -13,7 +13,7 @@ import (
 	"testing"
 )
 
-func TestNews_SaveNews(t *testing.T) {
+func TestNews_SaveNews_Success(t *testing.T) {
 	newsApp.SaveNewsFn = func(news *entity.News) (*entity.News, map[string]string) {
 		return &entity.News{
 			Topic:   "First Topic",
@@ -62,7 +62,7 @@ func TestNews_SaveNews(t *testing.T) {
 	assert.EqualValues(t, newsTagPayload.Data.Status, "First Status")
 }
 
-func TestNews_UpdateNews(t *testing.T) {
+func TestNews_UpdateNews_Success(t *testing.T) {
 	newsApp.GetNewsFn = func(newsID uint64) (*entity.News, error) {
 		return &entity.News{
 			Topic:   "First Topic",
@@ -120,7 +120,7 @@ func TestNews_UpdateNews(t *testing.T) {
 	assert.EqualValues(t, newsTagPayload.Data.Status, "First Status Updated")
 }
 
-func TestNews_GetAllNews(t *testing.T) {
+func TestNews_GetAllNews_Success(t *testing.T) {
 	newsApp.GetAllNewsFn = func() ([]*entity.News, error) {
 		return []*entity.News{
 			{
@@ -168,7 +168,7 @@ func TestNews_GetAllNews(t *testing.T) {
 	assert.EqualValues(t, len(newsTagPayload.Data), 2)
 }
 
-func TestNews_GetNews(t *testing.T) {
+func TestNews_GetNews_Success(t *testing.T) {
 	newsApp.GetNewsFn = func(newsID uint64) (*entity.News, error) {
 		return &entity.News{
 			Topic:   "First Topic",
