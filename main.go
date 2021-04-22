@@ -37,6 +37,8 @@ func main() {
 	news := interfaces.NewNews(services.News, services.Tag)
 	tag := interfaces.NewTag(services.Tag, services.News)
 
+	gin.SetMode(gin.ReleaseMode) // on-off debug
+
 	r := gin.Default()
 	api := r.Group("/api")
 
