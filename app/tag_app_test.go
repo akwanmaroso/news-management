@@ -9,6 +9,7 @@ import (
 var (
 	saveTagRepo       func(*entity.Tag) (*entity.Tag, map[string]string)
 	getTagRepo        func(uint64) (*entity.Tag, error)
+	getNewsByTag      func(string) ([]*entity.Tag, error)
 	getAllTagRepo     func() ([]*entity.Tag, error)
 	updateTagRepo     func(*entity.Tag) (*entity.Tag, map[string]string)
 	findTagByNameRepo func(name string) (*entity.Tag, error)
@@ -16,6 +17,10 @@ var (
 )
 
 type fakeTagApp struct{}
+
+func (f *fakeTagApp) GetNewsByTag(topic string) ([]*entity.Tag, error) {
+	return getNewsByTag(topic)
+}
 
 func (f *fakeTagApp) SaveTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return saveTagRepo(tag)

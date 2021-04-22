@@ -84,7 +84,7 @@ func (n *News) SaveNews(c *gin.Context) {
 
 func (n *News) GetAllNews(c *gin.Context) {
 	if c.Query("topic") != "" {
-		news, err := n.newsApp.GetByTopic(c.Query("topic"))
+		news, err := n.tagApp.GetNewsByTag(c.Query("topic"))
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, ErrorResponse(http.StatusInternalServerError, err.Error()))
 			return

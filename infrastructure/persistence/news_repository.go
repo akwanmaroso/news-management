@@ -67,16 +67,6 @@ func (n *NewsRepo) GetAllNews() ([]*entity.News, error) {
 	return news, nil
 }
 
-func (n *NewsRepo) GetByTopic(topic string) ([]*entity.News, error) {
-	var news []*entity.News
-	err := n.db.Debug().Order("created_at desc").Preload("Tags").Limit(100).Find(&news).Error
-	if err != nil {
-		return nil, err
-	}
-
-	return news, nil
-}
-
 func (n *NewsRepo) GetByStatus(status string) ([]*entity.News, error) {
 	var news []*entity.News
 	err := n.db.Debug().Order("created_at desc").Preload("Tags").Where("status = ?", status).Limit(100).Find(&news).Error

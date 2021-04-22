@@ -13,7 +13,6 @@ type NewsAppInterface interface {
 	SaveNews(*entity.News) (*entity.News, map[string]string)
 	GetAllNews() ([]*entity.News, error)
 	GetNews(uint64) (*entity.News, error)
-	GetByTopic(string) ([]*entity.News, error)
 	GetByStatus(string) ([]*entity.News, error)
 	UpdateNews(*entity.News) (*entity.News, map[string]string)
 	DeleteNews(uint64) error
@@ -31,10 +30,6 @@ func (n *newsApps) GetAllNews() ([]*entity.News, error) {
 
 func (n *newsApps) GetNews(newsID uint64) (*entity.News, error) {
 	return n.newsApp.GetNews(newsID)
-}
-
-func (n *newsApps) GetByTopic(topic string) ([]*entity.News, error) {
-	return n.newsApp.GetByTopic(topic)
 }
 
 func (n *newsApps) GetByStatus(status string) ([]*entity.News, error) {

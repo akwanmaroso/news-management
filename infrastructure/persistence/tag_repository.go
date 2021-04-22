@@ -96,3 +96,16 @@ func (t *TagRepo) FindTagByName(name string) (*entity.Tag, error) {
 	}
 	return &tag, nil
 }
+
+func (t *TagRepo) GetNewsByTag(topic string) ([]*entity.Tag, error) {
+	var tags []*entity.Tag
+
+	err := t.db.Debug().Where("name LIKE ?", "%"+topic+"%").Preload("News").Take(&tags).Error
+	if gorm.IsRecordNotFoundError(err) {
+		return nil, errors.New("record news not found")
+	}
+	if err != nil {
+		return nil, err
+	}
+	return tags, nil
+}

@@ -45,8 +45,13 @@ type TagAppInterface struct {
 	GetTagFn        func(uint64) (*entity.Tag, error)
 	GetAllTagFn     func() ([]*entity.Tag, error)
 	FindTagByNameFn func(name string) (*entity.Tag, error)
+	GetNewsByTagFn  func(string) ([]*entity.Tag, error)
 	UpdateTagFn     func(*entity.Tag) (*entity.Tag, map[string]string)
 	DeleteTagFn     func(uint64) error
+}
+
+func (t *TagAppInterface) GetNewsByTag(topic string) ([]*entity.Tag, error) {
+	return t.GetNewsByTagFn(topic)
 }
 
 func (t *TagAppInterface) SaveTag(tag *entity.Tag) (*entity.Tag, map[string]string) {

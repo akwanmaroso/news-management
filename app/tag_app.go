@@ -15,6 +15,7 @@ type TagAppInterface interface {
 	GetAllTag() ([]*entity.Tag, error)
 	UpdateTag(*entity.Tag) (*entity.Tag, map[string]string)
 	FindTagByName(name string) (*entity.Tag, error)
+	GetNewsByTag(topic string) ([]*entity.Tag, error)
 	DeleteTag(uint64) error
 }
 
@@ -38,6 +39,10 @@ func (t *tagApps) FindTagByName(name string) (*entity.Tag, error) {
 
 func (t *tagApps) UpdateTag(tag *entity.Tag) (*entity.Tag, map[string]string) {
 	return t.tagApp.UpdateTag(tag)
+}
+
+func (t *tagApps) GetNewsByTag(topic string) ([]*entity.Tag, error) {
+	return t.tagApp.GetNewsByTag(topic)
 }
 
 func (t *tagApps) DeleteTag(tagID uint64) error {

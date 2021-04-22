@@ -7,6 +7,7 @@ type TagRepository interface {
 	GetTag(uint64) (*entity.Tag, error)
 	GetAllTag() ([]*entity.Tag, error)
 	FindTagByName(name string) (*entity.Tag, error)
+	GetNewsByTag(topic string) ([]*entity.Tag, error)
 	UpdateTag(*entity.Tag) (*entity.Tag, map[string]string)
 	DeleteTag(uint64) error
 }
