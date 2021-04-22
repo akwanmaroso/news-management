@@ -44,11 +44,11 @@ func main() {
 	api.PUT("/news/:news_id", news.UpdateNews)
 	api.DELETE("/news/:news_id", news.DeleteNews)
 
-	api.GET("/tag", tag.GetAllTag)
-	api.GET("/tag/:tag_id", tag.GetTag)
-	api.PUT("/tag/:tag_id", tag.UpdateTag)
-	api.DELETE("/tag/:tag_id", tag.DeleteTag)
-	api.POST("/tag", tag.SaveTag)
+	api.GET("/tags", tag.GetAllTag)
+	api.GET("/tags/:tag_id", tag.GetTag)
+	api.PUT("/tags/:tag_id", tag.UpdateTag)
+	api.DELETE("/tags/:tag_id", tag.DeleteTag)
+	api.POST("/tags", tag.SaveTag)
 
 	log.Fatal(r.Run(":8000"))
 }
