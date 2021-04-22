@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/akwanmaroso/news/infrastructure/persistence"
 	"github.com/akwanmaroso/news/interfaces"
 	"github.com/gin-gonic/gin"
@@ -51,7 +52,11 @@ func main() {
 	api.DELETE("/tags/:tag_id", tag.DeleteTag)
 	api.POST("/tags", tag.SaveTag)
 
-	if err := r.Run(":8000"); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8000"
+	}
+	if err := r.Run(fmt.Sprintf(":%s", port)); err != nil {
 		panic(err)
 	}
 }
