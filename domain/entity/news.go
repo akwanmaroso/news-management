@@ -9,17 +9,12 @@ import (
 
 type Status int
 
-const (
-	Draft Status = iota + 1
-	Publish
-	Deleted
-)
-
 type News struct {
 	gorm.Model
 	Topic   string `json:"topic"`
 	Content string `json:"content"`
-	Status  Status `json:""`
+	Status  string `json:"status"`
+	Tags    []*Tag `gorm:"many2many:news_tags" json:"tags"`
 }
 
 func (news *News) BeforeSave() {
